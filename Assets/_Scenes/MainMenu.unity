@@ -128,7 +128,7 @@ MonoBehaviour:
   m_Script: {fileID: -822479833, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_NetworkPort: 7777
+  m_NetworkPort: 7778
   m_ServerBindToIP: 0
   m_ServerBindAddress: 
   m_NetworkAddress: localhost
@@ -142,7 +142,10 @@ MonoBehaviour:
   m_PlayerSpawnMethod: 0
   m_OfflineScene: MainMenu
   m_OnlineScene: World
-  m_SpawnPrefabs: []
+  m_SpawnPrefabs:
+  - {fileID: 194488, guid: 6d7e8eae550bc2048b5df418a809be30, type: 2}
+  - {fileID: 136586, guid: 2654dbdccf1dcfa4c89d39128781c2e2, type: 2}
+  - {fileID: 160184, guid: 419405e4a70e06b48844223c1d7f9fbc, type: 2}
   m_CustomConfig: 0
   m_MaxConnections: 4
   m_ConnectionConfig:
@@ -173,7 +176,7 @@ MonoBehaviour:
     m_MaxPacketSize: 2000
   m_Channels: 0500000000000000
   m_UseWebSockets: 0
-  m_UseSimulator: 1
+  m_UseSimulator: 0
   m_SimulatedLatency: 150
   m_PacketLossPercentage: 1
   m_MatchHost: mm.unet.unity3d.com

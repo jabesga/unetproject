@@ -81,8 +81,8 @@ public class Network_PlayerTransform : NetworkBehaviour {
 
 	void LerpRotations(){
 		if(!isLocalPlayer){
-			player.transform.rotation = Quaternion.Lerp(player.transform.rotation, syncRot, Time.deltaTime * lerpRate);
-			playerCam.transform.rotation = Quaternion.Lerp(playerCam.transform.rotation, syncRotCam, Time.deltaTime * lerpRate);
+			player.transform.rotation = Quaternion.Lerp(player.transform.rotation, syncRot, Mathf.Clamp(Time.deltaTime * lerpRate, 0, 0.99f));
+			playerCam.transform.rotation = Quaternion.Lerp(playerCam.transform.rotation, syncRotCam, Mathf.Clamp(Time.deltaTime * lerpRate, 0, 0.99f));
 		}
 	}
 

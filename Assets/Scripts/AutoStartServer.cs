@@ -5,8 +5,8 @@ using UnityEngine.Networking;
 public class AutoStartServer : MonoBehaviour {
 
 	NetworkManager manager;
-	public string ip = "localhost";
-	public int port = 7777;
+	public string ip = "52.16.108.94";
+	public int port = 7778;
 
 
 	void Awake(){

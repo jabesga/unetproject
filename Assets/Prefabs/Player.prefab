@@ -34,9 +34,9 @@ GameObject:
   - 114: {fileID: 11444184}
   - 114: {fileID: 11492860}
   - 114: {fileID: 11498064}
-  - 114: {fileID: 11482636}
-  - 114: {fileID: 11404054}
-  - 114: {fileID: 11421200}
+  - 114: {fileID: 11461984}
+  - 114: {fileID: 11411012}
+  - 114: {fileID: 11499884}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -117,7 +117,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 125136}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 428972}
@@ -413,7 +413,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
---- !u!114 &11404054
+--- !u!114 &11411012
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -421,21 +421,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 125136}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 523a58ae4caf9544dbc4144c262d71dd, type: 3}
+  m_Script: {fileID: 11500000, guid: ee68ae26cc250ea4890c60772701e276, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCam: {fileID: 428972}
---- !u!114 &11421200
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 125136}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87720d92c7afc2e478d05fe909f67461, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  playerUniqueName: 
 --- !u!114 &11424566
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -576,7 +565,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 8bc94ec6ed537e743b481638bdcd503d, type: 3}
   m_JumpSound: {fileID: 8300000, guid: 5897aeed9b676024fbb8c694b421a861, type: 3}
   m_LandSound: {fileID: 8300000, guid: 3b09d59f4499d45428baa7a21e954296, type: 3}
---- !u!114 &11482636
+--- !u!114 &11461984
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -584,10 +573,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 125136}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee68ae26cc250ea4890c60772701e276, type: 3}
+  m_Script: {fileID: 11500000, guid: 0bc50f25e5f39b5458a868d6f0a12e20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerUniqueName: 
+  itemSelected: 1
+  selectedImage: {fileID: 21300000, guid: a16689f17ba386340a9d516c4c14dc7e, type: 3}
+  unselectedImage: {fileID: 21300000, guid: 00445b6e36d59564295dd498139f2504, type: 3}
 --- !u!114 &11492860
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -613,6 +604,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dd7ff2b94411e64487749fa19bc8ec0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11499884
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 125136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d835b85c9609e445a9cbcb9f06e50ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCam: {fileID: 428972}
+  cubeTemplate: {fileID: 136586, guid: 2654dbdccf1dcfa4c89d39128781c2e2, type: 2}
+  platformTemplate: {fileID: 194488, guid: 6d7e8eae550bc2048b5df418a809be30, type: 2}
+  drawerTemplate: {fileID: 160184, guid: 419405e4a70e06b48844223c1d7f9fbc, type: 2}
+  builtMode: 0
 --- !u!143 &14316438
 CharacterController:
   m_ObjectHideFlags: 1
@@ -639,7 +646,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: player
@@ -657,6 +664,36 @@ Prefab:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: created
+      value: 
+      objectReference: {fileID: 194488, guid: 6d7e8eae550bc2048b5df418a809be30, type: 2}
+    - target: {fileID: 0}
+      propertyPath: platformTemplate
+      value: 
+      objectReference: {fileID: 194488, guid: 6d7e8eae550bc2048b5df418a809be30, type: 2}
+    - target: {fileID: 0}
+      propertyPath: selectedImage
+      value: 
+      objectReference: {fileID: 21300000, guid: a16689f17ba386340a9d516c4c14dc7e,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: unselectedImage
+      value: 
+      objectReference: {fileID: 21300000, guid: 00445b6e36d59564295dd498139f2504,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: cubeTemplate
+      value: 
+      objectReference: {fileID: 136586, guid: 2654dbdccf1dcfa4c89d39128781c2e2, type: 2}
+    - target: {fileID: 0}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: drawerTemplate
+      value: 
+      objectReference: {fileID: 160184, guid: 419405e4a70e06b48844223c1d7f9fbc, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 125136}

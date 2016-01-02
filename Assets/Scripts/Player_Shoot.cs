@@ -2,12 +2,15 @@
 using System.Collections;
 using UnityEngine.Networking;
 
+	
 public class Player_Shoot : NetworkBehaviour {
 
 	private int damage = 25;
 	private float range = 200;
 	[SerializeField] private Transform playerCam;
 	private RaycastHit hit;
+
+
 
 	// Update is called once per frame
 	void Update () {

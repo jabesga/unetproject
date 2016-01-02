@@ -113,8 +113,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 632ae612d280dcf408a5a239fab04c85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ip: localhost
-  port: 7777
+  ip: 52.16.108.94
+  port: 7778
 --- !u!114 &277067621
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -140,7 +140,10 @@ MonoBehaviour:
   m_PlayerSpawnMethod: 0
   m_OfflineScene: MainMenu
   m_OnlineScene: World
-  m_SpawnPrefabs: []
+  m_SpawnPrefabs:
+  - {fileID: 136586, guid: 2654dbdccf1dcfa4c89d39128781c2e2, type: 2}
+  - {fileID: 160184, guid: 419405e4a70e06b48844223c1d7f9fbc, type: 2}
+  - {fileID: 194488, guid: 6d7e8eae550bc2048b5df418a809be30, type: 2}
   m_CustomConfig: 0
   m_MaxConnections: 4
   m_ConnectionConfig:
