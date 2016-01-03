@@ -22,7 +22,14 @@ public class Player_Construction : NetworkBehaviour {
 
 	private int lastItemSelect = 1;
 	public bool builtMode = false;
+	public bool destructionMode = false;
+	private Vector2 screenCenter;
 
+	void Awake () {
+		screenCenter = new Vector2(Screen.width/2, Screen.height/2);
+		Cursor.lockState = CursorLockMode.Locked;
+		Cursor.visible = false;
+	}
 	public override void OnStartClient(){
 		templates = new Dictionary<int, GameObject>();
 		templates.Add(1, cubeTemplate);
@@ -45,7 +52,47 @@ public class Player_Construction : NetworkBehaviour {
 		LoadInstancePrefabs();
 	}
 
+	[Command]
+	void CmdDeleteInstancePrefab(String name, Vector3 pos, Quaternion rot, GameObject obj){
+		Debug.Log("Deleting object...");
+		BinaryFormatter bf = new BinaryFormatter();
+		FileStream file = File.Open(Application.persistentDataPath + "/levelInfo.dat", FileMode.Open);
+		ObjectDataList dataList = (ObjectDataList) bf.Deserialize(file);
+		file.Close();
 
+		int object_id = -99;
+		if(name.Equals("CubeTemplate(Clone)")){
+			object_id = 1;
+		}
+		else if(name.Equals("PlatformTemplate(Clone)")){
+			object_id = 2;
+		}
+		else if(name.Equals("DrawerTemplate(Clone)")){
+			object_id = 3;
+		}
+		bool removed = false;
+		int i = 0;
+		while (i < dataList.objectsCreated.Count && removed == false) {
+			ObjectData o = dataList.objectsCreated[i];
+			if(o.getId().Equals(object_id)){
+				if(o.getPosition().Equals(pos)){
+					if(o.getRotation().Equals(rot)){
+						dataList.objectsCreated.RemoveAt(i);
+						removed = true;
+						Debug.Log ("Object found");
+					}
+				}
+			}
+			i++;
+		}
+
+		file = File.Open(Application.persistentDataPath + "/levelInfo.dat", FileMode.Create);
+		bf.Serialize(file, dataList);
+		file.Close();
+		Debug.Log ("Object removed");
+		NetworkServer.Destroy (obj);
+
+	}
 	[Command]
 	void CmdSaveInstancePrefab(String name, Vector3 pos, Quaternion rot){
 		Debug.Log("Saving object...");
@@ -137,7 +184,7 @@ public class Player_Construction : NetworkBehaviour {
 			}
 
 			if(builtMode){
-				if(Physics.Raycast(playerCam.GetComponent<Camera>().ScreenPointToRay(Input.mousePosition), out hit, range)){
+				if(Physics.Raycast(playerCam.GetComponent<Camera>().ScreenPointToRay(screenCenter), out hit, range)){ //Input.mousePosition), out hit, range)){
 					if(lastItemSelect != this.GetComponent<InventoryHotbar>().itemSelected || objectInConstruction == null){
 						lastItemSelect = this.GetComponent<InventoryHotbar>().itemSelected;
 						if(objectInConstruction){
@@ -148,14 +195,26 @@ public class Player_Construction : NetworkBehaviour {
 					}
 					objectInConstruction.transform.position = hit.point - objectInConstruction.transform.FindChild("CustomPivot").transform.localPosition;
 				}
-			}
-
-			if(Input.GetKeyDown(KeyCode.Mouse0)){
-				if(builtMode){
+				if(Input.GetKeyDown(KeyCode.Mouse0)){
 					CmdSaveInstancePrefab(objectInConstruction.name, objectInConstruction.transform.position, objectInConstruction.transform.rotation);
 					builtMode = false;
 					objectInConstruction = null;
-					
+				}
+			}
+			if(this.GetComponent<InventoryHotbar>().itemSelected == 4){
+				destructionMode = true;
+			}
+			else{
+				destructionMode = false;
+			}
+
+			if(destructionMode){
+				if(Physics.Raycast(playerCam.GetComponent<Camera>().ScreenPointToRay(screenCenter), out hit, range)){
+					if(hit.transform.tag != "Indestructible"){
+						if(Input.GetKeyDown(KeyCode.Mouse0)){
+							CmdDeleteInstancePrefab(hit.transform.name, hit.transform.position, hit.transform.rotation, hit.transform.gameObject);
+						}
+					}
 				}
 			}
 		}

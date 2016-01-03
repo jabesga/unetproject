@@ -7,7 +7,7 @@ public class InventoryHotbar : MonoBehaviour {
 	private GameObject hotBar;
 	public int itemSelected = 1;
 	private int itemMin = 1;
-	private int itemMax = 3;
+	private int itemMax = 4;
 	public Sprite selectedImage;
 	public Sprite unselectedImage;
 
